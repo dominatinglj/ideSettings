@@ -10,214 +10,216 @@ Below are **"File and Code Templates"** settings for some examples of normal usi
     ```javascript
     /* 全局变量方法*/
     var globalAction = {
-      init: function () {
-          this.snifBrowser.init();
-          this.fixPlaceholder();
-          this.lazyLoad.init('j-img');
-      },
-      snifBrowser: {  /* 判断浏览器类型*/
-          hasRun: false,
-          isWebkit: false,
-          isSafari: false,
-          isIDevice: false,
-          isIpad: false,
-          isIphone: false,
-          isAndroid: false,
-          isMobile: false,
-          isWechat: false,
-          device: '',
-          version: '',
-          standalone: '',
-          init: function () {
-              this.hasRun = true;
+        init: function () {
+            this.snifBrowser.init();
+            this.fixPlaceholder();
+            this.lazyLoad.init('j-img');
+        },
+        snifBrowser: {  /* 判断浏览器类型*/
+            hasRun: false,
+            isWebkit: false,
+            isSafari: false,
+            isIDevice: false,
+            isIpad: false,
+            isIphone: false,
+            isAndroid: false,
+            isMobile: false,
+            isWechat: false,
+            device: '',
+            version: '',
+            standalone: '',
+            init: function () {
+                this.hasRun = true;
     
-              var navigator = window.navigator,
-                  userAgent = navigator.userAgent,
-                  ios = userAgent.match(/(iPad|iPhone|iPod)[^;]*;.+OS\s([\d_\.]+)/),
-                  android = userAgent.match(/(Android)[\s|\/]([\d\.]+)/);
+                var navigator = window.navigator,
+                    userAgent = navigator.userAgent,
+                    ios = userAgent.match(/(iPad|iPhone|iPod)[^;]*;.+OS\s([\d_\.]+)/),
+                    android = userAgent.match(/(Android)[\s|\/]([\d\.]+)/);
     
-              this.isWebkit = /WebKit\/[\d.]+/i.test(userAgent);
-              this.isSafari = ios ? (navigator.standalone ? this.isWebkit : (/Safari/i.test(userAgent) && !/CriOS/i.test(userAgent) && !/MQQBrowser/i.test(userAgent))) : false;
+                this.isWebkit = /WebKit\/[\d.]+/i.test(userAgent);
+                this.isSafari = ios ? (navigator.standalone ? this.isWebkit : (/Safari/i.test(userAgent) && !/CriOS/i.test(userAgent) && !/MQQBrowser/i.test(userAgent))) : false;
     
-              if (ios) {
-                  this.device = ios[1];
-                  this.version = ios[2].replace(/_/g, '.');
-                  this.isIDevice = (/iphone|ipad|ipod/i).test(navigator.appVersion);
-                  this.isIpad = userAgent.match(/iPad/i);
-                  this.isIphone = userAgent.match(/iPhone/i);
-              } else if (android) {
-                  this.version = android[2];
-                  this.isAndroid = (/android/i).test(navigator.appVersion);
-              }
+                if (ios) {
+                    this.device = ios[1];
+                    this.version = ios[2].replace(/_/g, '.');
+                    this.isIDevice = (/iphone|ipad|ipod/i).test(navigator.appVersion);
+                    this.isIpad = userAgent.match(/iPad/i);
+                    this.isIphone = userAgent.match(/iPhone/i);
+                } else if (android) {
+                    this.version = android[2];
+                    this.isAndroid = (/android/i).test(navigator.appVersion);
+                }
     
-              this.isMobile = this.isAndroid || this.isIDevice;
-              this.standalone = navigator.standalone;
-              this.isWechat = userAgent.indexOf("MicroMessenger") >= 0;
-          }
-      },
-      fixPlaceholder: function () {   /* 修复placeholder属性*/
-          var $input = $('input, textarea');
+                this.isMobile = this.isAndroid || this.isIDevice;
+                this.standalone = navigator.standalone;
+                this.isWechat = userAgent.indexOf("MicroMessenger") >= 0;
+            }
+        },
+        fixPlaceholder: function () {   /* 修复placeholder属性*/
+            var $input = $('input, textarea');
     
-          if (!('placeholder' in document.createElement("input"))) {
-              $input.each(function (index, element) {
-                  var placeText = $(element).attr('placeholder');
+            if (!('placeholder' in document.createElement("input"))) {
+                $input.each(function (index, element) {
+                    var placeText = $(element).attr('placeholder');
     
-                  if ($(element).val() === '') {
-                      $(element).val(placeText);
-                  }
+                    if ($(element).val() === '') {
+                        $(element).val(placeText);
+                    }
     
-                  $(this).on('focus', function () {
-                      if ($(this).val() === placeText) {
-                          $(this).val('');
-                      }
-                  }).on('blur', function () {
-                      if ($(this).val() === '') {
-                          $(this).val(placeText);
-                      }
-                  });
-              });
-          }
-      },
-      lazyLoad: {
-          timeoutId: null,
-          init: function (className) {
-              var self = this;
+                    $(this).on('focus', function () {
+                        if ($(this).val() === placeText) {
+                            $(this).val('');
+                        }
+                    }).on('blur', function () {
+                        if ($(this).val() === '') {
+                            $(this).val(placeText);
+                        }
+                    });
+                });
+            }
+        },
+        lazyLoad: {
+            timeoutId: null,
+            init: function (className) {
+                var self = this;
     
-              $(window).on('scroll', function () {
-                  self.bindLazyLoad(className);
-              });
-          },
-          bindLazyLoad: function (className) {    /* 触发*/
-              clearTimeout(globalAction.lazyLoad.timeoutId);
-              globalAction.lazyLoad.timeoutId = setTimeout(function () {
-                  globalAction.lazyLoad.screamScope(className);
-              }, 500);
-          },
-          screamScope: function (className, offset) { /* 获取屏幕内dom数组*/
-              var self = this;
-              var $all = $('.' + className),
-                  minHeight = document.body.scrollTop || document.documentElement.scrollTop,
-                  maxHeight = minHeight + $(window).height(),
-                  domArr = [];
+                self.bindLazyLoad(className);
     
-              if (typeof offset !== 'number') {
-                  offset = 50;
-              }
+                $(window).on('scroll', function () {
+                    self.bindLazyLoad(className);
+                });
+            },
+            bindLazyLoad: function (className) {    /* 触发*/
+                var self = this;
     
-              $all.each(function (index, element) {
-                  var elemHeight = $(element).offset().top;
+                clearTimeout(self.timeoutId);
+                self.timeoutId = setTimeout(function () {
+                    self.imgLazyLoad(self.screamScope(className),className);
+                }, 500);
+            },
+            screamScope: function (className, offset) { /* 获取屏幕内dom数组*/
+                var $all = $('.' + className),
+                    minHeight = document.body.scrollTop || document.documentElement.scrollTop,
+                    maxHeight = minHeight + $(window).height(),
+                    domArr = [];
     
-                  if (elemHeight <= maxHeight + offset && elemHeight >= minHeight - offset) {
-                      domArr.push(element);
-                  }
-              });
+                if (typeof offset !== 'number') {
+                    offset = 50;
+                }
     
-              self.imgLazyLoad(domArr, className);
-          },
-          imgLazyLoad: function (domArr, className) { /* 图片延时加载*/
-              $.each(domArr, function (index, value) {
-                  var src = $(value).attr('data-src'),
-                      newImg = new Image();
+                $all.each(function (index, element) {
+                    var elemHeight = $(element).offset().top;
     
-                  if (src !== undefined) {
-                      newImg.src = src;
+                    if (elemHeight <= maxHeight + offset && elemHeight >= minHeight - offset) {
+                        domArr.push(element);
+                    }
+                });
     
-                      /* 重新加载或缓存加载*/
-                      if (newImg.complete) {  /* 缓存加载*/
-                          $(value).attr('src', src)
-                              .removeAttr('data-src')
-                              .removeClass(className);
-                      } else {
-                          newImg.onload = function () {   /* 新加载*/
-                              $(value).attr('src', src)
-                                  .removeAttr('data-src')
-                                  .removeClass(className);
-                          };
-                      }
-                  }
-              });
-          }
-      },
-      addFavorite: function (url, title) {  /* 加入收藏夹,url必须带有协议头*/
-          if (window.external && 'addFavorite' in window.external) {
-              window.external.addFavorite(url, title);
-          } else if (window.sidebar && window.sidebar.addPanel) {
-              window.sidebar.addPanel(url, title);
-          } else if (window.opera && window.print) {
-              this.title = title;
-              return true;
-          } else {
-              alert('加入收藏失败，请使用' + (navigator.userAgent.toLowerCase().indexOf('mac') !== -1 ? 'Command/Cmd' : 'Ctrl') + '+D 进行添加');
-          }
-      },
-      isIE: function (num) {  /* 判断IE版本*/
-          var dom = document.createElement("b");
+                return domArr;
+            },
+            imgLazyLoad: function (domArr, className) { /* 图片延时加载*/
+                $.each(domArr, function (index, value) {
+                    var src = $(value).attr('data-src'),
+                        newImg = new Image();
     
-          dom.innerHTML = "<!--[if IE " + num + "]><i></i><![endif]-->";
+                    if (src !== undefined) {
+                        newImg.src = src;
     
-          return dom.getElementsByTagName("i").length;
-      },
-      animateToTop: function (scrollTo, time) {  /* 模拟animate滚动到顶部*/
-          var scrollFrom = parseInt(document.body.scrollTop),
-              i = 0,
-              runEvery = 5;
+                        /* 重新加载或缓存加载*/
+                        if (newImg.complete) {  /* 缓存加载*/
+                            $(value).attr('src', src)
+                                .removeAttr('data-src')
+                                .removeClass(className);
+                        } else {
+                            newImg.onload = function () {   /* 新加载*/
+                                $(value).attr('src', src)
+                                    .removeAttr('data-src')
+                                    .removeClass(className);
+                            };
+                        }
+                    }
+                });
+            }
+        },
+        addFavorite: function (url, title) {  /* 加入收藏夹,url必须带有协议头*/
+            if (window.external && 'addFavorite' in window.external) {
+                window.external.addFavorite(url, title);
+            } else if (window.sidebar && window.sidebar.addPanel) {
+                window.sidebar.addPanel(url, title);
+            } else if (window.opera && window.print) {
+                this.title = title;
+                return true;
+            } else {
+                alert('加入收藏失败，请使用' + (navigator.userAgent.toLowerCase().indexOf('mac') !== -1 ? 'Command/Cmd' : 'Ctrl') + '+D 进行添加');
+            }
+        },
+        isIE: function (num) {  /* 判断IE版本*/
+            var dom = document.createElement("b");
     
-          scrollTo = parseInt(scrollTo);
-          time /= runEvery;
+            dom.innerHTML = "<!--[if IE " + num + "]><i></i><![endif]-->";
     
-          var interval = setInterval(function () {
-              i++;
-              document.body.scrollTop = (scrollTo - scrollFrom) / time * i + scrollFrom;
-              if (i >= time) {
-                  clearInterval(interval);
-              }
-          }, runEvery);
-      },
-      cookie: {
-          getCookie: function (name) {   /* 获取指定cookie*/
-              var cookieArr = document.cookie.split("; "),
-                  cookieValue,
-                  i,
-                  temArr;
+            return dom.getElementsByTagName("i").length;
+        },
+        animateToTop: function (scrollTo, time) {  /* 模拟animate滚动到顶部*/
+            var scrollFrom = parseInt(document.body.scrollTop),
+                i = 0,
+                runEvery = 5;
     
-              for (i = 0; i < cookieArr.length; i++) {
-                  temArr = cookieArr[i].split("=");
-                  if (name === temArr[0]) {
-                      cookieValue = unescape(temArr[1]);
-                      break;
-                  }
-              }
+            scrollTo = parseInt(scrollTo);
+            time /= runEvery;
     
-              return cookieValue;
-          },
-          setCookie: function (c_name, value, days) {   /* 设置cookie*/
-              var expiresDays = new Date();
+            var interval = setInterval(function () {
+                i++;
+                document.body.scrollTop = (scrollTo - scrollFrom) / time * i + scrollFrom;
+                if (i >= time) {
+                    clearInterval(interval);
+                }
+            }, runEvery);
+        },
+        cookie: {
+            getCookie: function (name) {   /* 获取指定cookie*/
+                var cookieArr = document.cookie.split("; "),
+                    cookieValue,
+                    i,
+                    temArr;
     
-              expiresDays.setDate(expiresDays.getDate() + days);
-              document.cookie = c_name + "=" + escape(value) + ((typeof days === 'number') ? ';expires=' + expiresDays.toGMTString() : '');
-          }
-      },
-      lowerVersion: function (version, base) { /* 判断version是否较低*/
-          var i,
-              arr1 = version.toString().split('.'),
-              arr2 = base.toString().split('.'),
-              length = arr1.length > arr2.length ? arr1.length : arr2.length;
+                for (i = 0; i < cookieArr.length; i++) {
+                    temArr = cookieArr[i].split("=");
+                    if (name === temArr[0]) {
+                        cookieValue = unescape(temArr[1]);
+                        break;
+                    }
+                }
     
-          for (i = 0; i < length; i++) {
-              if (arr1[i] !== arr2[i]) {
+                return cookieValue;
+            },
+            setCookie: function (c_name, value, days) {   /* 设置cookie*/
+                var expiresDays = new Date();
     
-                  return parseInt(arr1[i]) < parseInt(arr2[i]);
-              }
-          }
+                expiresDays.setDate(expiresDays.getDate() + days);
+                document.cookie = c_name + "=" + escape(value) + ((typeof days === 'number') ? ';expires=' + expiresDays.toGMTString() : '');
+            }
+        },
+        lowerVersion: function (version, base) { /* 判断version是否较低*/
+            var i,
+                arr1 = version.split('.'),
+                arr2 = base.split('.'),
+                length = arr1.length > arr2.length ? arr1.length : arr2.length;
     
-          return false;   /* 两值相同*/
-      }
+            for (i = 0; i < length; i++) {
+                if (arr1[i] !== arr2[i]) {
     
+                    return parseInt(arr1[i]) < parseInt(arr2[i]);
+                }
+            }
+    
+            return false;   /* 两值相同*/
+        }
     };
     
     $(function () {
-      /* 初始化*/
-      globalAction.init();
+        /* 初始化*/
+        globalAction.init();
     
     
     });
