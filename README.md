@@ -202,8 +202,8 @@ Below are **"File and Code Templates"** settings for some examples of normal usi
         },
         lowerVersion: function (version, base) { /* 判断version是否较低*/
             var i,
-                arr1 = version.split('.'),
-                arr2 = base.split('.'),
+                arr1 = version.toString().split('.'),
+                arr2 = base.toString().split('.'),
                 length = arr1.length > arr2.length ? arr1.length : arr2.length;
     
             for (i = 0; i < length; i++) {
