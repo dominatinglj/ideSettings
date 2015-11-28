@@ -1,4 +1,4 @@
-# ideSettings
+#  ideSettings
 
 For now,there's just **webstorm**.
 For I am an front-end engineer, I am working on *html* && *css* && *javascript* and sth. within them.
