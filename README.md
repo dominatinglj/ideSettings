@@ -3,9 +3,9 @@
 For now, there's only **webstorm** settings. I exported this settings to make sure the ide settings in my workplace and my pc are the same.
 For I am an front-end engineer, I am working with *html* & *css* & *javascript* and sth. among them.
 By using these settings:
-- You should choose the **Scheme** of my name -- **Geoffrey** in preferences in **Code Style** and **Colors & Fonts**.
-- There are some templates in **File and Code Templates**. I picked them up [below](#templates).
-- There are two types of keymap in ***Keymap* named *MyMac* and *MyWindows* which are for Mac or Windows.
+- You should choose the **Scheme** of my name -- *Geoffrey* in preferences in "**Code Style**" and "**Colors & Fonts**".
+- There are some templates in "**File and Code Templates**". I picked them up [below](#templates).
+- There are two types of keymap in "**Keymap**" named *MyMac* and *MyWindows* which are for Mac or Windows.
 
 ----
 ##Templates
