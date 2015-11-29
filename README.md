@@ -9,7 +9,7 @@ By using these settings:
 
 ----
 ##Templates
-**"File and Code Templates"** settings for some examples of normal using code or reset code.
+"**File and Code Templates**" settings for some examples of frequently-used code or reset code.
 - js:
     ```javascript
     /* 全局变量方法*/
