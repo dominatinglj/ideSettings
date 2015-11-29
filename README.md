@@ -1,11 +1,15 @@
 #  ideSettings
 
-For now,there's just **webstorm**.
-For I am an front-end engineer, I am working on *html* && *css* && *javascript* and sth. within them.
-By using these settings, you should choose the **Scheme** of my name -- **Geoffrey**.
+For now, there's only **webstorm** settings. I exported this settings to make sure the ide settings in my workplace and my pc are the same.
+For I am an front-end engineer, I am working with *html* & *css* & *javascript* and sth. among them.
+By using these settings:
+    - You should choose the **Scheme** of my name -- **Geoffrey** in preferences in **Code Style** and **Colors & Fonts**.
+    - There are some templates in **File and Code Templates**. I picked them up [below](#templates).
+    - There are two types of keymap in ***Keymap* named *MyMac* and *MyWindows* which are for Mac or Windows.
 
 ----
-Below are **"File and Code Templates"** settings for some examples of normal using code or reset code.
+##Templates
+**"File and Code Templates"** settings for some examples of normal using code or reset code.
 - js:
     ```javascript
     /* 全局变量方法*/
