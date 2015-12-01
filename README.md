@@ -19,7 +19,7 @@ By using these settings:
             this.fixPlaceholder();
             this.lazyLoad.init('j-img');
         },
-        snifBrowser: {  /* 判断浏览器类型*/
+        snifBrowser: {  /* 判断浏览器的类型*/
             hasRun: false,
             isWebkit: false,
             isSafari: false,
