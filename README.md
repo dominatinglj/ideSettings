@@ -12,14 +12,14 @@ By using these settings:
 "**File and Code Templates**" settings for some examples of frequently-used code or reset code.
 - js:
     ```javascript
-    /* 全局变量方法*/
+    /* 全局的变量方法*/
     var globalAction = {
         init: function () {
             this.snifBrowser.init();
             this.fixPlaceholder();
             this.lazyLoad.init('j-img');
         },
-        snifBrowser: {  /* 判断浏览器类型*/
+        snifBrowser: {  /* 判断浏览器的类型*/
             hasRun: false,
             isWebkit: false,
             isSafari: false,
@@ -101,7 +101,7 @@ By using these settings:
                     self.imgLazyLoad(self.screamScope(className),className);
                 }, 500);
             },
-            screamScope: function (className, offset) { /* 获取屏幕内dom数组*/
+            screamScope: function (className, offset) { /* 获取屏幕内的dom数组*/
                 var $all = $('.' + className),
                     minHeight = document.body.scrollTop || document.documentElement.scrollTop,
                     maxHeight = minHeight + $(window).height(),
